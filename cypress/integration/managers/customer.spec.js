@@ -42,6 +42,17 @@ describe('example to-do app', () => {
         cy.get('.form-control').type(20000);
         cy.get('form.ng-dirty > .btn').click();
         cy.get('.borderM > :nth-child(3) > :nth-child(2)').contains(20000);
+        // withdraw
+        cy.get('[ng-class="btnClass3"]').click();
+        cy.get('.form-control').type(19000);
+        cy.get('.form-control').type(19000);
+        cy.get('form.ng-dirty > .btn').click();
+        cy.get('.borderM > :nth-child(3) > :nth-child(2)').contains(1000);
+        // withdraw with error
+        cy.get('.form-control').type(2000);
+        cy.get('form.ng-dirty > .btn').click();
+        cy.get('.error').contains('Transaction Failed. You can not withdraw amount more than the balance.');
+
         // Reset
         cy.get('[ng-class="btnClass1"]').click();
         cy.get('[style="float:right;margin-top:-30px;"]').click();
@@ -56,6 +67,9 @@ describe('example to-do app', () => {
         cy.get(`tbody > tr:last > :nth-child(1)`).should('not.contain','ali');
         cy.get(`tbody > tr:last > :nth-child(2)`).should('not.contain','berdaiji');     
         cy.get(`tbody > tr:last > :nth-child(3)`).should('not.contain','70000');
+
+        // move to home
+        cy.get('.home').click();
          
     });
 
